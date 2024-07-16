@@ -55,6 +55,11 @@ ui <- fluidPage(
                          choices = c(Head = "head",
                                      All = "all"),
                          selected = "head"),
+            
+            # Horizontal line ----
+            tags$hr(),
+            
+            # Button to click that will show the plot
             actionButton( "go", "Plot LM")
         ),
 
@@ -70,7 +75,7 @@ ui <- fluidPage(
 # Define server logic required to draw a histogram
 server <- function(input, output) {
 
-    #lmdata <- reactiveValues()
+    lmdata <- reactiveValues()
     dataInput <- reactive({
         req(input$file1)
         
@@ -80,12 +85,15 @@ server <- function(input, output) {
                        quote = input$quote)
         return(df)
     })
-    #observeEvent{input$go,{
-    #update_lm()
-    #})
-    #update_lm <- function(){
-        #lmdatat$model <- lm(y~x, data = dataInput())
-    #}
+    
+    update_lm <- function(){
+        lmdata$model <- lm(y~x, data = dataInput())
+    }
+    
+    observeEvent(input$go,{
+    update_lm()
+    })
+    
     
     output$origPlot <- renderPlot({
         plot(dataInput()$x,dataInput()$y)
@@ -93,7 +101,7 @@ server <- function(input, output) {
     
     output$lmPlot <- renderPlot({
         plot(dataInput()$x,dataInput()$y)
-        #abline(lmdata$model)
+        abline(lmdata$model)
     })
     
     
