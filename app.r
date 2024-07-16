@@ -107,9 +107,6 @@ server <- function(input, output) {
     
     output$contents <- renderTable({
         
-        # input$file1 will be NULL initially. After the user selects
-        # and uploads a file, head of that data file by default,
-        # or all rows if selected, will be shown.
         
         
         if(input$disp == "head") {
