@@ -96,11 +96,11 @@ server <- function(input, output) {
     
     
     output$origPlot <- renderPlot({
-        plot(dataInput()$x,dataInput()$y)
+        plot(dataInput()$x,dataInput()$y,xlab = "X values", ylab = "Y values")
     })
     
     output$lmPlot <- renderPlot({
-        plot(dataInput()$x,dataInput()$y)
+        plot(dataInput()$x,dataInput()$y,xlab = "X values", ylab = "Y values")
         abline(lmdata$model)
     })
     
