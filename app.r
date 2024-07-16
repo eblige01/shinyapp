@@ -55,7 +55,7 @@ ui <- fluidPage(
                          choices = c(Head = "head",
                                      All = "all"),
                          selected = "head"),
-            #actionButtons( "go", "Plot LM")
+            actionButton( "go", "Plot LM")
         ),
 
         # Show a plot of the generated distribution
