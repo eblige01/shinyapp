@@ -67,7 +67,8 @@ ui <- fluidPage(
         mainPanel(
            plotOutput("origPlot"),
            plotOutput("lmPlot"),
-           tableOutput("contents")
+           tableOutput("contents"),
+           textOutput("sumStats")
         )
     )
 )
@@ -88,6 +89,11 @@ server <- function(input, output) {
     
     update_lm <- function(){
         lmdata$model <- lm(y~x, data = dataInput())
+        lmdata$rsq <- summary(lmdata$model)$r.squared
+        lmdata$int <- coef(lmdata$model)[1]
+        lmdata$slope <- coef(lmdata$model)[2]
+        lmdata$coef <- sqrt(lmdata$rsq)
+    
     }
     
     observeEvent(input$go,{
@@ -117,7 +123,10 @@ server <- function(input, output) {
         }
         
     })
-        
+    
+    output$sumStats <- renderText({
+        paste("R squared:",lmdata$rsq, "Slope:", lmdata$slope,"Intercept:",lmdata$int, "Correlation coefficient",lmdata$coef)
+        })
 }
 
 # Run the application 
