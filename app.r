@@ -125,7 +125,7 @@ server <- function(input, output) {
     })
     
     output$sumStats <- renderText({
-        paste("R squared:",lmdata$rsq, "Slope:", lmdata$slope,"Intercept:",lmdata$int, "Correlation coefficient",lmdata$coef)
+        paste("R squared: ",lmdata$rsq, "Slope: ", lmdata$slope,"Intercept: ",lmdata$int, "Correlation coefficient: ",lmdata$coef)
         })
 }
 
